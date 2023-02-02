@@ -1,0 +1,85 @@
+/* Utility Classes */
+.chip {
+    background-color: rgb(210, 210, 210);
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    width: max-content;
+}
+
+.btn {
+    border: 0;
+    background: none;
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+.btn-contained {
+    background-color: grey;
+    border-radius: 0.5rem;   
+}
+
+.btn-contained.btn-green {
+    background-color: green;
+    color: white;
+}
+
+.btn-contained.btn-blue {
+    background-color: blue;
+    color: white;
+}
+
+/* Actual */
+
+.product {
+    position: relative;
+    z-index: 0;
+    padding: 1rem 1.5rem;
+    border: 0.5px solid gray;
+    width: max-content;
+    border-radius: 0.5rem;
+}
+
+.product__image {
+    width: 15rem;
+    height: 15rem;
+}
+
+.product__description {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.product__description__name {
+    margin-bottom: 0;
+}
+
+.product__description__offer {
+    position: absolute;
+    z-index: 1;
+    top: 0.5rem;
+    left: 0.5rem;
+    background-color: blueviolet;
+}
+
+.product__description__quantity-list {
+    display: flex;
+    justify-content: flex-start;
+    gap: 0.5rem;
+}
+
+.product__description__quantity-list:is(ul) {
+    list-style: none;
+    padding-left: 0;
+}
+
+.product__actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.product__actions__price p {
+    margin: 0;
+}

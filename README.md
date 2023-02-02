@@ -1,2 +1,2 @@
 # Tekion Interns FE Project
-### This repo contains list and cart views for FE interns project week
+### This repo contains list and cart views for FE interns project
