@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="style.css">
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+      <title>Blinkit</title>
+   </head>
+   <body>
+      <header class="navBar flex flex__center__cross-axis">
+         <!-- Left -->
+         <div class="navBar__left flex flex__center__cross-axis">
+            <img class="navBar__left__icon" src="images/blinkit.webp" alt="Blinkit Logo">
+            <div class="navBar__left__content" >
+               <p><strong>Delivery in 10 mins</strong></p>
+               <p>Ranchi,Jharkhand,India</p>
+            </div>
+         </div>
+         <!-- Right -->
+         <div class="navBar__right flex flex__center__cross-axis">
+            <p>Login
+            <p>
+               <button class="btn flex flex__center__cross-axis">
+                  <img class="btn__icon" src="images/icons8-shopping-cart-96.png" alt="">
+            <p class="btn__text">My Cart</p>
+            </button>
+         </div>
+      </header>
+      <main>
+         <div class="belowNav flex flex__center__main-axis">
+            <a href="#">Vegetables & Fruits</a>
+            <a href="#">Dairy & Breakfast</a>
+            <a href="#">Munchies</a>
+            <a href="#">Cold Drinks &  Juices</a>
+            <a href="#">Instant & Frozen Fruits</a>
+            <a href="#">Tea, Coffee & Health Drinks</a>
+            <a href="#">Bakery & Biscuits</a>
+            <a href="#">More</a>
+         </div>
+         <div class="flex">
+         <aside id ="asideBar" class="aside flex__column"> </aside>
+         <div class="main">
+            <div class="main__Nav flex flex__center__cross-axis">
+               <p><strong>Buy Fresh Vegetables Online</strong></p>
+               <div class="main__NavSide flex flex__center__cross-axis">
+                  <label style="font-size:small">Sort by</label>
+                  <select name="name" class="main__NavSide__dropdown">
+                     <option value="">Relevance</option>
+                  </select>
+               </div>
+            </div>
+            <div id="gridContainer"> </div>  
+            </div> 
+         </div>
+      </main>
+      <footer class= "flex flex__center__cross-axis">
+         <div class="footerleft flex">
+            <p>© 2018 Blinkit Commerce Pvt Ltd</p>
+         </div>
+         <div class="footermiddle flex flex__center__cross-axis">
+            <p><strong>Download App</strong></p>
+            <div>
+               <img src="images/playstore.png" alt="">
+               <img src="images/appstore.png" alt="">
+            </div>
+         </div>
+         <div class="footerright flex flex__center__cross-axis">
+            <img src="images/facebook.png" alt="">
+            <img src="images/twitter.png" alt="">
+            <img src="images/instagram.png" alt="">
+            <img src="images/linkedin.png" alt="">
+         </div>
+      </footer>
+      <script type="module" src="index.js"></script>
+   </body>
+</html>
