@@ -75,7 +75,7 @@ const items = [
         "id": "2",
     },
     {
-        "product_name": "Eggoz Farm Fresh White Eggs (30 pieces)",
+        "product_name": "Eggoz Farm Fresh White Eggs",
         "image_url": "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=50,metadata=none,w=270/app/images/products/sliding_image/477483a.jpg?ts=1662091836",
         "id": "3",
         "price": 370,
@@ -152,3 +152,5 @@ const cart = {
     "delivery_charge": 15,
     "grand_total": 143,
 };
+
+export {items, categories};

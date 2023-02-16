@@ -95,7 +95,7 @@ body {
 .asideMenu {
 	border: 0.1px solid gray;
 	padding: 0.5rem;
-	padding-right: 1.5rem;
+	padding-right: 1.5 rem;
 }
 
 .asideMenu__icon {

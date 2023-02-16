@@ -1,93 +1,97 @@
-const body = document.body;
+import {items, categories} from './data.js';
 
-//NavBar
-const header = document.createElement("header");
+function createPara(text){
+    const para = document.createElement("p");
+    para.textContent = text;
+    return para;
+}
 
-const navBarLeft = document.createElement("div");
-const icon = document.createElement("img");
-icon.src = './images/blinkit.webp';
-icon.classList.add("navBar__left__icon");
-const navBarLeftDiv = document.createElement("div");
-const text1 = document.createElement("p");
-text1.textContent = "Delivery in 10 mins";
-const text2 = document.createElement("p");
-text2.textContent = "Ranchi, Jharkhand, India";
-navBarLeftDiv.appendChild(text1);
-navBarLeftDiv.appendChild(text2);
-navBarLeftDiv.classList.add("navBar__left__content");
-navBarLeft.classList.add("navBar__left", "flex", "flex__center__cross-axis");
-navBarLeft.appendChild(icon);
-navBarLeft.appendChild(navBarLeftDiv);
+function createImage(url){
+    const img = document.createElement("img");
+    img.src = url;
+    return img;
+}
 
-const navBarRight = document.createElement("div");
-const text3 = document.createElement("p");
-text3.textContent = "Login";
-const btn = document.createElement("button");
-const icon2 = document.createElement("img");
-icon2.src = './images/icons8-shopping-cart-96.png';
-icon2.classList.add("btn__icon");
-const text4 = document.createElement("p");
-text4.textContent = "My Cart";
-text4.classList.add("btn_text");
-btn.appendChild(icon2);
-btn.appendChild(text4);
+function createBtn(text){
+    const btn = document.createElement("button");
+    btn.textContent = text;
+    return btn;
+}
 
-btn.classList.add("btn", "flex", "flex__center__cross-axis");
 
-navBarRight.appendChild(text3);
-navBarRight.appendChild(btn);
 
-navBarRight.classList.add("flex", "navBar__right", "flex__center__cross-axis");
+function makeGrid(items){
+    const innerDiv = document.createElement("div");
+    innerDiv.classList.add("flex");
+    const iconDiv = document.createElement("div");
+    iconDiv.classList.add("card", "flex",  "flex__column",  "flex__center__cross-axis");
+    const div1 = document.createElement("div");
+    const div2 = document.createElement("div");
+    div2.classList.add("container__btn", "flex__center__main-axis", "flex__center__cross-axis");
+    const text = createPara("10% off");
+    div2.appendChild(text);
+    const img = createImage(items.image_url);
+    img.classList.add("container__icon");
+    div1.append(div2,img);
 
-header.appendChild(navBarLeft);
-header.appendChild(navBarRight);
+    const para1 = createPara("Sourced at 5 AM");
+    para1.classList.add("para2");
+    const para2 = createPara(items.product_name);
+    para2.style.fontWeight = "bold";
+    para2.classList.add("para1");
+    const para3 = createPara("1 kg");
+    para3.classList.add("para1", "gray");
 
-header.classList.add("flex", "navBar", "flex__center__cross-axis");
-body.appendChild(header);
+    const bottomDiv = document.createElement("div");
+    bottomDiv.classList.add("cardBottom", "flex",  "flex__center__cross-axis");
+    const div4 = document.createElement("div");
+    const p1 = createPara(`₹${items.discount_price}`);
+    const p2 = createPara(`₹${items.price}`);
+    p2.classList.add("gray");
+    div4.append(p1,p2);
+    const btn = createBtn("ADD");
+    btn.classList.add("innerbtn");
+    bottomDiv.append(div4, btn);
 
-//main
-const main = document.createElement("main");
-const belowNav = document.createElement("div");
+    iconDiv.append(div1, para1, para2, para3,bottomDiv);
+    innerDiv.append(iconDiv);
 
-const link1 = document.createElement("a");
-const textLink1 = document.createElement("p");
-textLink1.textContent = "Vegetables & Fruits";
-link1.appendChild(textLink1);
-const link2 = document.createElement("a");
-const textLink2 = document.createElement("p");
-textLink2.textContent = "Dairy & Breakfast";
-link2.appendChild(textLink2);
-const link3 = document.createElement("a");
-const textLink3 = document.createElement("p");
-textLink3.textContent = "Munchies";
-link3.appendChild(textLink3);
-const link4 = document.createElement("a");
-const textLink4 = document.createElement("p");
-textLink4.textContent = "Cold Drinks &  Juices";
-link4.appendChild(textLink4);
-const link5 = document.createElement("a");
-const textLink5 = document.createElement("p");
-textLink5.textContent = "Instant & Frozen Fruits";
-link5.appendChild(textLink5);
-const link6 = document.createElement("a");
-const textLink6 = document.createElement("p");
-textLink6.textContent = "Tea, Coffee & Health Drinks";
-link6.appendChild(textLink6);
-const link7 = document.createElement("a");
-const textLink7 = document.createElement("p");
-textLink7.textContent = "Bakery & Biscuits";
-link7.appendChild(textLink7);
-const link8 = document.createElement("a");
-const textLink8 = document.createElement("p");
-textLink8.textContent ="More";
-link8.appendChild(textLink8);
+    return innerDiv;
+}
 
-belowNav.append(link1,link2,link3,link4,link5,link6,link7,link8);
-belowNav.classList.add("belowNav", "flex", "flex__center__main-axis");
-main.appendChild(belowNav);
-body.appendChild(main);
+function makeCategory(category){
+    const section = document.createElement("section");
+    const img = createImage(category.image_url);
+    img.classList.add("asideMenu__icon");
+    const text = createPara(category.display_text);
+    section.append(img, text);
+    section.classList.add("asideMenu", "flex");
+    return section;
+}
 
-aside = document.createElement("aside");
+
+const gridContainer = document.getElementById("gridContainer");
+gridContainer.classList.add("grid__container", "flex", "flex__column");
+
+for(let i=0;i<items.length;i+=4)
+{
+    const row = document.createElement("div");
+    row.classList.add("flex");
+    for(let j=i;j<i+4;j++)
+    {
+        const div = makeGrid(items[j]);
+        row.append(div);
+    }
+    gridContainer.append(row);
+}
+
+const asideBar = document.getElementById("asideBar");
+for(let i=0;i<categories.length;i++)
+{
+    const category = makeCategory(categories[i]);
+    asideBar.appendChild(category);
+}
+
 
 
 
