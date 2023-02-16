@@ -162,6 +162,7 @@ body {
 	align-self: flex-end;
 	background-color: rgb(211, 245, 211);
 	color: green;
+	font-weight: bold;
 }
 
 .innerbtn {
