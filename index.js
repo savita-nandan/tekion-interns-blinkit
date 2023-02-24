@@ -9,6 +9,8 @@ import {
     createContainer
 } from './create.js';
 
+
+//Building the cardItem
 function makeGrid(items) {
     const innerDiv = createContainer(["flex"]);
     const iconDiv = createContainer(["card", "flex", "flex__column", "flex__center__cross-axis"]);
@@ -32,6 +34,7 @@ function makeGrid(items) {
     btn.classList.add("flex", "flex__center__main-axis", "flex__center__cross-axis", "innerbtn");
     btn.setAttribute("id", items.id);
     btn.addEventListener("click", handleCart);
+    btn.addEventListener("click", handleAdd);
     bottomDiv.append(div4, btn);
 
     iconDiv.append(div1, para1, para2, para3, bottomDiv);
@@ -40,6 +43,7 @@ function makeGrid(items) {
     return innerDiv;
 }
 
+//creating the sidebar
 function makeCategory(category) {
     const section = createContainer(["asideMenu", "flex"]);
     const img = createImage(category.image_url, ["asideMenu__icon"]);
@@ -102,72 +106,88 @@ function onClick(event) {
 }
 
 const counter = new Map();
+let flag = true;
 
-function handleCart(event) {
-    let id = event.target.id;
-    let countDisplay = createPara('0', ["flex"]);
-    countDisplay.setAttribute("id", id);
-
-    if (counter.has(id) == false) {
-        counter.set(id, 0);
+function handleAdd(event) {
+    if (!flag) {
+        let id = event.target.id;
+        let addText = createPara("ADD", []);
+        addText.setAttribute("id", id);
+        let cartBtn = document.getElementById(id);
+        cartBtn.replaceChildren(addText);
+        flag = true;
     }
-    countDisplay.innerHTML = counter.get(id);
-    let cartBtn = document.getElementById(id);
-    let addBtn = createPara('+', ["flex"]);
-
-    addBtn.setAttribute("id", id);
-    addBtn.addEventListener("click", addCart);
-
-    let subBtn = createPara('-', ["flex"]);
-    subBtn.setAttribute("id", id);
-
-    cartBtn.replaceChildren(subBtn, countDisplay, addBtn);
-    subBtn.addEventListener("click", subCart);
-    cartBtn.classList.add("flex");
 }
 
-let count = 0;
-const addedToCart = document.getElementById("addedToCart");
-addedToCart.classList.add("flex", "flex__column", "flex__center__cross-axis");
-const p = createPara(count, []);
+function handleCart(event) {
+    if (flag == true) {
+        let id = event.target.id;
+        if (counter.has(id) == false) {
+            counter.set(id, 0);
+            addCart(event);
+        }
+        let countDisplay = createPara('0', ["flex"]);
+        countDisplay.setAttribute("id", id);
+        countDisplay.innerHTML = counter.get(id);
+        let cartBtn = document.getElementById(id);
+        let addBtn = createPara('+', ["flex"]);
+
+        addBtn.setAttribute("id", id);
+        addBtn.addEventListener("click", addCart);
+
+        let subBtn = createPara('-', ["flex"]);
+        subBtn.setAttribute("id", id);
+
+        cartBtn.replaceChildren(subBtn, countDisplay, addBtn);
+        subBtn.addEventListener("click", subCart);
+        cartBtn.classList.add("flex");
+    }
+}
 
 function addCart(event) {
     let id = event.target.id;
-
-    count++;
-
     if (counter.has(id)) {
         counter.set(id, counter.get(id) + 1);
     }
-    for (let i = 0; i < items.length; i++) {
+    for(let i = 0; i < items.length; i++) {
         if (items[i].id == id) {
-            let cart_item = createPara(items[i].product_name, ["flex", "flex__center__cross-axis"]);
-            addedToCart.append(cart_item);
+            localStorage.setItem(id,Number(localStorage.getItem(id))+1);
             break;
         }
     }
-    p.replaceChildren(count);
 }
 
 function subCart(event, subBtn) {
     let id = event.target.id;
-    if (counter.get(id) > 0) {
+    if (counter.get(id) == 1) {
+        counter.delete(id);
+        flag = false;
+        let item = "";
+        for (let i = 0; i < items.length; i++) {
+            if (items[i].id == id) {
+                item = items[i].product_name;
+            }
+        }
+        localStorage.removeItem(id);
+    } 
+    else if (counter.get(id) > 0) {
         counter.set(id, counter.get(id) - 1);
-        count--;
-    }
-    let item = "";
-    for (let i = 0; i < items.length; i++) {
-
-        if (items[i].id == id) {
-            item = items[i].product_name;
+        let item = "";
+        for (let i = 0; i < items.length; i++) {
+            if (items[i].id == id) {
+                item = items[i].product_name;
+            }
         }
+            localStorage.setItem(id, Number(localStorage.getItem(id))-1);
     }
-    for (let i = 0; i < addedToCart.children.length; i++) {
-        if (addedToCart.children[i].textContent == item) {
-            addedToCart.removeChild(addedToCart.children[i]);
-            break;
-        }
-    }
-    p.replaceChildren(count);
 }
-addedToCart.append(p);
+
+window.onload = () => {
+    localStorage.clear();
+}
+
+const cartDisplay = document.getElementById("cart");
+cart.addEventListener("click", cartDisplayRender);
+function cartDisplayRender(){
+    location.href = "cart.html";
+}
